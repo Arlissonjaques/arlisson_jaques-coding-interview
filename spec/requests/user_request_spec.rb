@@ -35,5 +35,21 @@ RSpec.describe 'Users', type: :request do
       it 'returns all the users' do
       end
     end
+
+    context 'quando ha filtragem por usuarios' do
+      context 'quando existe match pacial com 2 parametros' do
+        let!(:user1) { create(:user, username: 'user1') }
+        let!(:user2) { create(:user, username: 'user2') }
+        let!(:user3) { create(:user, username: 'papaleguas3') }
+
+        before do
+          get users_path(username: 'us')
+        end
+
+        it 'deveria retornar dois usernames chamados userx' do
+          expect(result.count).to eq(2)
+        end
+      end
+    end
   end
 end
