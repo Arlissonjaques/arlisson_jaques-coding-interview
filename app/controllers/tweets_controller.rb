@@ -1,5 +1,7 @@
 class TweetsController < ApplicationController
   def index
-    render json: Tweet.all
+    user = params[:user_username].present? ? Tweet.by_user(params[:user_username]) : Tweet.all
+    
+    render json: user 
   end
 end
